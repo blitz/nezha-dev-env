@@ -5,9 +5,24 @@ buildFHSUserEnv {
     curl
     git
     gnumake
+    zile
 
-    pkgsCross.riscv64.gcc
-    pkgsCross.riscv64.binutils
+    # Everything
+    pkgsCross.riscv64.buildPackages.gcc
+    pkgsCross.riscv64.buildPackages.binutils
+
+    # U-Boot
+    dtc
+    (python3.withPackages (p: [
+        p.libfdt
+        p.setuptools # for pkg_resources
+    ]))
+
+    bison
+    flex
+    swig
+    openssl
+    openssl.dev
   ];
 
   inherit runScript;
