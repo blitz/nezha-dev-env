@@ -15,6 +15,12 @@ board:
 with out the hassle of setting up a RISC-V cross-compilation
 environment and keeping it working.
 
+My intention with documenting this repository is to give an example
+how to use Nix to easily create and "preserve" build environments for
+software that are more flexible and efficient than Docker
+environments. I have used a similar approach to [package
+Coreboot](https://github.com/blitz/nix-coreboot).
+
 ## Relevant Documentation
 
 The
