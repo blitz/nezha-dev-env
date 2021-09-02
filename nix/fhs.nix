@@ -12,7 +12,6 @@ buildFHSUserEnv {
     pkgsCross.riscv64.buildPackages.binutils
 
     # U-Boot
-    dtc
     (python3.withPackages (p: [
         p.libfdt
         p.setuptools # for pkg_resources
@@ -23,6 +22,10 @@ buildFHSUserEnv {
     swig
     openssl
     openssl.dev
+
+    # Linux
+    ncurses
+    ncurses.dev
   ];
 
   inherit runScript;
