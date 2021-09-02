@@ -43,6 +43,12 @@ You can streamline entering the Nix shell by using
 [direnv](https://direnv.net/), which makes this automatic when you
 `cd` into the directory.
 
+If you enter this shell the first time, it will be slow, because the
+cross-compilation toolchain is built. Going forward, this toolchain is
+cached. My [Cachix](https://www.cachix.org/) repo may contain prebuilt
+copies built in this repo via Github Actions. You can do `cachix use
+blitz` to use it.
+
 After entering the Nix shell, you have access to three tools:
 
 - `fhs`, which drops you into the Nezha development chroot,
