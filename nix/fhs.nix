@@ -32,5 +32,6 @@ buildFHSUserEnv {
 
   profile = ''
     export LANG=C.UTF-8
+    export CROSS_COMPILE=riscv64-unknown-linux-gnu-
   '';
 }

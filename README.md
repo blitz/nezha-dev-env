@@ -24,11 +24,55 @@ U-Boot, and Linux for the Nezha board. This description largely
 applies.
 
 **Note:** You have to use `CROSS_COMPILE=riscv64-unknown-linux-gnu-`
-instead of `CROSS_COMPILE=riscv64-linux-gnu-`.
+instead of `CROSS_COMPILE=riscv64-linux-gnu-`. But the chroot already
+comes with this automatically set in the environment.
 
 ## Usage
 
 To use the chroot in this repository, you need to [install
 Nix](https://nixos.org/download.html).
 
-To be written...
+Then you can enter the [Nix
+shell](https://ghedam.at/15978/an-introduction-to-nix-shell).
+
+```sh
+$ nix-shell
+```
+
+You can streamline entering the Nix shell by using
+[direnv](https://direnv.net/), which makes this automatic when you
+`cd` into the directory.
+
+After entering the Nix shell, you have access to three tools:
+
+- `fhs`, which drops you into the Nezha development chroot,
+- `connect-nezha`, which connects to the serial port of the Nezha
+  board (if you [connected a USB serial
+  adapter](https://linux-sunxi.org/Allwinner_Nezha#Adding_a_serial_port)
+  to the debug pins),
+- [niv](https://github.com/nmattia/niv), which is used to update this
+  environment.
+
+After you enter the chroot, you can compile system software for the
+Nezha board following the linux-sunxi wiki:
+
+```sh
+
+nix-shell $ fhs
+
+fhs-chrootenv $ cd work
+fhs-chrootenv work $ git clone https://github.com/smaeul/opensbi -b d1-wip
+...
+
+# The environment variable is already set for you convenience.
+fhs-chrootenv work $ echo CROSS_COMPILE
+riscv64-unknown-linux-gnu-
+
+fhs-chrootenv work $ PLATFORM=generic FW_PIC=y make -C opensbi
+...
+ AS        platform/generic/firmware/fw_payload.o
+ ELF       platform/generic/firmware/fw_payload.elf
+ OBJCOPY   platform/generic/firmware/fw_payload.bin
+```
+
+🚀🚀🚀 That's it. Happy cross compiling! 🚀🚀🚀
